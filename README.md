@@ -26,24 +26,24 @@ Basic usage of the **status** API endpoint:
 
 
 
-import solaredge_setapp
-import requests
-import json
+import solaredge_setapp<br>
+import requests<br>
+import json<br>
 
-inverter_ip = "<your inverter IP address>"
-for example:
-inverter_ip = "10.0.0.152"
+inverter_ip = "<your inverter IP address>"<br>
+for example:<br>
+inverter_ip = "10.0.0.152"<br>
 
 status_request = requests.get(f"http://{inverter_ip}/web/v1/status").content<br>
-status = solaredge_setapp.status.Status().parse_protobuf(status_request)
+status = solaredge_setapp.status.Status().parse_protobuf(status_request)<br>
 
-print(f"Inverter {status['serial']} is {status['status']} at {status['power_ac']:.2f}W")
+print(f"Inverter {status['serial']} is {status['status']} at {status['power_ac']:.2f}W")<br>
 
-#or write status as json to file:
+#or write status as json to file:<br>
 
 f = open("/tmp/FileName", "w")<br>
 f.write(json.dumps(status))<br>
-f.close()
+f.close()<br>
 
 
 
