@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+message Maintenance {
+  message Int32Value { int32 value = 1;}
+  message BoolValue { bool value = 1;}
+  message StringValue { string value = 1;}
+  message DateTimeValue {
+    Int32Value year = 1;
+    Int32Value month = 2;
+    Int32Value day = 3;
+    Int32Value hour = 4;
+    Int32Value minutes = 5;
+    Int32Value seconds = 6;
+  }
+  message Units {
+    bool celsius = 1;
+    bool fahrenheit = 2;
+  }
+  message Iso {
+    int32 isolation = 1;
+    int32 scale = 2;
+  }
+
+  message Time {
+    Maintenance.DateTimeValue current_time = 1;
+        Maintenance.StringValue ntp_server = 2;
+        Maintenance.Int32Value utc_offset = 3;
+  }
+
+  message Temperature {
+    Maintenance.Int32Value degrees = 1;
+    Maintenance.Units units = 2;
+  }
+
+  message Diagnostics {
+    message Inverters {
+      message Inverter {
+        message Isolation {
+          Maintenance.Iso alpha = 1;
+          Maintenance.Iso r_iso = 2;
+          Maintenance.Int32Value fault_location = 3;
+        }
+
+        message OptimizersStatus {
+          Maintenance.Int32Value total = 1;
+          Maintenance.Int32Value online = 2;
+        }
+
+        message Optimizer {
+          Maintenance.StringValue serial = 1;
+          Maintenance.BoolValue online = 2;
+          Maintenance.DateTimeValue last_report = 3;
+          Maintenance.Int32Value po_voltage = 5;
+          Maintenance.Int32Value module_voltage = 6;
+          Maintenance.Int32Value module_current = 7;
+          Maintenance.Temperature temperature = 8;
+        }
+
+        Maintenance.StringValue serial = 1;
+        repeated Optimizer optimizer = 2;
+        Isolation isolation = 3;
+        OptimizersStatus optimizers_status = 4;
+      }
+
+      Inverter left = 1;
+      Inverter primary = 2;
+      Inverter right = 3;
+    }
+
+    Inverters inverters = 1;
+  }
+
+  message Standby {
+     Maintenance.Int32Value enabled = 1;
+  }
+
+  message AFCI {
+    Maintenance.BoolValue enabled = 1;
+    Maintenance.BoolValue manual_reconnect = 2;
+  }
+
+
+  message System {
+   string name = 1;
+   int32 timestamp = 2;
+  }
+
+  Time time = 1;
+  Temperature temperature = 2;
+  AFCI afci = 3;
+  Diagnostics diagnostics = 6;
+  Standby standby = 7;
+  System system = 13;
+}
+
