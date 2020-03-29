@@ -24,7 +24,7 @@ In order to use `compile-proto.sh` to (re)compile the protocol buffer `.proto` m
 
 Basic usage of the **status** API endpoint:
 
-[code]
+
 
 import solaredge_setapp
 import requests
@@ -45,7 +45,7 @@ f = open("/tmp/FileName", "w")
 f.write(json.dumps(status))
 f.close()
 
-[/code]
+
 
 
 See the `status.proto` file for all possible fields, and `solaredge_setapp/status.py`  for all fields that are parsed for this endpoint.
