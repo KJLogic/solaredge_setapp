@@ -34,15 +34,15 @@ inverter_ip = "<your inverter IP address>"
 for example:
 inverter_ip = "10.0.0.152"
 
-status_request = requests.get(f"http://{inverter_ip}/web/v1/status").content
+status_request = requests.get(f"http://{inverter_ip}/web/v1/status").content<br>
 status = solaredge_setapp.status.Status().parse_protobuf(status_request)
 
 print(f"Inverter {status['serial']} is {status['status']} at {status['power_ac']:.2f}W")
 
 #or write status as json to file:
 
-f = open("/tmp/FileName", "w")
-f.write(json.dumps(status))
+f = open("/tmp/FileName", "w")<br>
+f.write(json.dumps(status))<br>
 f.close()
 
 
